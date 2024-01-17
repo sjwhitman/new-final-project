@@ -25,6 +25,17 @@ class Task(Base):
     task_description = Column(String(200))
     duration_in_seconds = Column(Integer)
 
+class Users(Base):
+    __tablename__ = "users"
+
+    user_id = Column(Integer, primary_key=True)
+    username = Column(String(50), nullable=False)
+    email = Column(String(200, nullable = False))
+    theme_preference = Column(String(10))
+    work_session_time = Column(Integer)
+    break_session_time = Column(Integer)
+
+
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
