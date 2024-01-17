@@ -35,8 +35,23 @@ task1 = Task(
 )
 
 
-def add_task():
-    session.add(task1)
+def add_task(name):
+    new_task = Task(name=name)
+    # session.add(task1)
+    session.add(new_task)
     session.commit()
 
-add_task()
+def get_tasks():
+    return session.query(Task).all()
+
+def update_task(task_id, new_task_name):
+    task = session.query(Task).filter_by(task_id=task_id).first()
+    task.name = new_task_name
+    session.commit()
+
+def delete_task(task_id):
+    task = session.query(Task).filter_by(task_id=task_id).first()
+    session.delete(task)
+    session.commit()
+
+# update_task(1,"Sweep")
