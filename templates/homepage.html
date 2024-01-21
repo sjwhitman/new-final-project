@@ -22,4 +22,25 @@
       <button type="submit">Add Task</button>
     </form>
 
+    <h2>Create an Account</h2>
+    <form action="/create_user" method="POST">
+        <p>Email <input type="text" name="email"></p>
+        <p>Password <input type="text" name="password"></p>
+        <p>Username <input type="text" name="username"></p>
+        <p>Theme Preference <input type="text" name="theme_preference"></p>
+        <p>Work Session Length <input type="text" name="work_session_time"></p>
+        <p>Break Session Length <input type="text" name="break_session_time"></p>
+        <p><input type="submit"></p>
+    </form>
+
+   
+    <h2> Login</h2>
+    <form action="/login" method="POST">
+        <p>Email <input type="text" name="email"></p>
+        <p>Password <input type="password" name="password"></p>
+        <p> <input type="submit"></p>
+    </form>
+
 {% endblock %}
+
+<!-- #bring user related functionality to its own "profile" page where users can update preferences -->

@@ -1,0 +1,20 @@
+Next steps:
+1. Create User Account
+    a. User can store custom intervals for their work timer and their break timer
+    HTML - probably the homepage - form for create Account
+    Server - route to handle form submission - creates user instance, adds to database, redirects to login page
+    Server - build login page route
+    HTML - login page html
+2. Users Need Login Option
+    HTML - login form submits to login handling route
+    Server - log user in, redirect to profile if successful, redirect to login page if not successful
+    Server - profile route to render profile page
+    HTML - profile page (start basic, something that just shows the username or something)
+3.Build out Profile page
+    db_init - add function to get all tasks by user id
+    db_init - add a couple of tasks to a test user to seed the database
+    html - add jinja for-loop to display all tasks belonging to a particular user, check that test data displays when test user is logged in
+4. Users Need to Log Out
+5. User Can Save Individual Tasks - backend queries database by task_id each time to display list 
+6. Users can update profile information
+7. User can pick between light and dark mode
