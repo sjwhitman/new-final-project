@@ -3,14 +3,24 @@
   
   {% block body %}
 
-        <h1>User Profile</h1>
-    <!-- planning to style in css later -->
+<h1>User Profile</h1>
+<!-- planning to style in css later -->
 <div class="profile-info">
-    <h2>{{ user.username }}'s Profile</h2>
-    <p>Email: {{ user.email }}</p>
-    <p>Light/dark mode: {{ user.theme_preference }}</p>
-    <p>Work Session Time: {{ user.work_session_time }} seconds</p>
-    <p>Break Session Time: {{ user.break_session_time }} seconds</p>
+    <form action="/update_profile" method="POST">
+        <label for="theme_preference">Theme Preference:</label>
+        <input type="text" name="theme_preference" value="{{ user.theme_preference }}"><br>
+
+        <label for="work_session_time">Work Time Interval (minutes):</label>
+        <input type="number" name="work_session_time" value="{{ user.work_session_time }}"><br>
+
+        <label for="break_session_time">Break Time Interval (minutes):</label>
+        <input type="number" name="break_session_time" value="{{ user.break_session_time }}"><br>
+
+        <label for="password">New Password:</label>
+        <input type="password" name="password"><br>
+
+        <input type="submit" value="Update Profile">
+    </form>
 </div>
 
 <div class="tasks-list">
@@ -23,7 +33,6 @@
         </ul>
     </div>   
    
-    <p><a href="/">Back to Homepage</a></p>
+<p><a href="/">Back to Homepage</a></p>
     
-    </body>
-    </html>
+{% endblock %}

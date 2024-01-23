@@ -7,6 +7,7 @@ import crud
 import model
 import server
 
+
 os.system('dropdb tasks')
 os.system('createdb tasks')
 
@@ -32,7 +33,3 @@ task1 = model.Task(
 
 model.db.session.add(task1)
 model.db.session.commit()
-
-#   name = db.Column(db.String(50), nullable=False)
-#     start_time = db.Column(db.DateTime(timezone=True))
-#     end_time = db.Column(db.DateTime(timezone=True))

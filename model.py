@@ -24,6 +24,8 @@ class User(db.Model):
     theme_preference = db.Column(db.String(10))
     work_session_time = db.Column(db.Integer)
     break_session_time = db.Column(db.Integer)
+    # work_time_interval = db.Column(db.Integer)
+    # break_time_interval = db.Column(db.Integer)
 
     tasks = db.relationship('Task', back_populates='user')
 

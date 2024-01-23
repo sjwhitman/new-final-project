@@ -21,12 +21,12 @@ def delete_task(task_id):
     db.session.commit()
 
 # CRUD functionality for users table
-def add_user(username, email, password):
+def add_user(username, email, password, theme_preference, work_session_time, break_session_time):
     existing_user = User.query.filter_by(email=email).first()
     # if existing_user:
     #     return "User already exists in db"
     # else:
-    new_user = User(username=username, email=email, password=password)
+    new_user = User(username=username, email=email, password=password, theme_preference=theme_preference, work_session_time=work_session_time, break_session_time=break_session_time)
     db.session.add(new_user)
     db.session.commit()
 
