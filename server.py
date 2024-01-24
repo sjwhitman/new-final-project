@@ -122,7 +122,18 @@ def update_profile():
     db.session.commit()
     flash("Profile updated successfully.")
     return redirect("/profile")
-
+@app.route("/logout", methods=["POST"])
+def logout():
+    #get the user info fromm the session
+    # session["user_email"]
+    #is the user logged in? is the users data in the session
+    if "user_email" in session:
+        #if the user is logged in, remove their email and username from the session?
+        #notify the user that they are logged out
+        session.pop('user_email', None)
+        flash("You are logged out")
+    #redirect to homepage
+    return redirect("/")
 
 if __name__ == "__main__":
     connect_to_db(app)

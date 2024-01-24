@@ -31,7 +31,14 @@
                 <li>{{ task.task_name }} - {{ task.timer_type }} ({{ task.duration }} seconds)</li>
             {% endfor %}
         </ul>
-    </div>   
+    </div>
+    
+<h2>Log Out</h2>
+<!-- Needs a button with an event listener or a form with a submit  -->
+<form action="/logout" method="POST">
+    <label for="logout">Logout?</label>
+    <input type="submit" value="Logout?">
+</form>
    
 <p><a href="/">Back to Homepage</a></p>
     
