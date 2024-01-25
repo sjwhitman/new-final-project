@@ -6,6 +6,7 @@ from model import db, connect_to_db, Task, User
 app = Flask(__name__)
 app.secret_key = "dev"
 # app.jinja_env.undefined = StrictUndefined
+app.static_folder = 'static'
 
 
 @app.route("/")
