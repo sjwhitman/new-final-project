@@ -2,8 +2,8 @@ from model import User, Task, db, connect_to_db
 from flask import Flask, current_app
 
 # CRUD for tasks table
-def add_task(name):
-    new_task = Task(name=name)
+def add_task(task_name):
+    new_task = Task(task_name=task_name)
     db.session.add(new_task)
     db.session.commit()
 
@@ -12,7 +12,7 @@ def get_tasks():
 
 def update_task(task_id, new_task_name):
     task = Task.query.get(task_id)
-    task.name = new_task_name
+    task.task_name = new_task_name
     db.session.commit()
 
 def delete_task(task_id):

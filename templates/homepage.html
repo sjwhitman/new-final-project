@@ -7,7 +7,7 @@
     <h2>Tasks</h2>
     <ul>
       {% for task in tasks %}
-        <li>{{ task.name }} 
+        <li>{{ task.task_name }} 
           <form method="post" action="/delete_task/{{ task.task_id }}">
             <button type="submit">Delete</button>
           </form>
@@ -41,16 +41,16 @@
         <p> <input type="submit"></p>
     </form>
 
-    <!-- Display the countdown timer in an element -->
-    <h2>Countdown Timer</h2>
+  <!-- Allow the user to enter a countdown time -->
+  <h2>Enter Countdown Time</h2>
+  <input type="datetime-local" id="countdown-input">
 
-    <!-- Display the countdown timer in an element -->
-    <p id="timer"></p>
+  <!-- Display the countdown in an element -->
+  <div id="timer"></div>
 
-    <!-- Include the JavaScript file -->
-    <script src="{{ url_for('static', filename='frontend.js') }}"></script>
-    <!-- <script src="/static/frontend.js"></script> -->
-
+  <!-- Include the JavaScript file -->
+  <script src="{{ url_for('static', filename='frontend.js') }}"></script>
 {% endblock %}
+
 
 <!-- #bring user related functionality to its own "profile" page where users can update preferences -->

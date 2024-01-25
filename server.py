@@ -18,7 +18,7 @@ def homepage():
 @app.route("/add_task", methods=['POST'])
 def add_tasks_route():
     task_name = request.form.get('task_name')
-    add_task(name=task_name)
+    add_task(task_name=task_name)
     return redirect('/')
 
 @app.route("/delete_task/<int:task_id>", methods=['GET', 'POST'])
