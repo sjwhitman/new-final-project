@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, flash
+from flask import Flask, render_template, request, session, redirect, flash, jsonify
 from crud import get_tasks, add_task, delete_task, update_task, add_user,get_user_by_email
 from model import db, connect_to_db, Task, User
 
@@ -6,26 +6,27 @@ from model import db, connect_to_db, Task, User
 app = Flask(__name__)
 app.secret_key = "dev"
 # app.jinja_env.undefined = StrictUndefined
-app.static_folder = 'static'
 
 
 @app.route("/")
 def homepage():
     """View homepage."""
-    tasks = get_tasks()
-    return render_template('homepage.html', tasks=tasks)
+    return render_template('homepage.html')
 
 #routes for task list
 @app.route("/add_task", methods=['POST'])
 def add_tasks_route():
     task_name = request.form.get('task_name')
-    add_task(task_name=task_name)
-    return redirect('/')
+    task_description = request.form.get('task_description')
+    timer_type = request.form.get('timer_type')
+    duration = request.form.get('duration')
+    add_task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=session['user_id'])
+    return redirect('/profile')
 
-@app.route("/delete_task/<int:task_id>", methods=['GET', 'POST'])
+@app.route("/delete_task/<int:task_id>", methods=['POST'])
 def delete_task_route(task_id):
     delete_task(task_id=task_id)
-    return redirect('/')
+    return redirect('/profile')
 
 #routes for user accounts
 @app.route("/create_user", methods=["POST"])
@@ -50,25 +51,29 @@ def register_user():
 
     return redirect("/")
 
-@app.route("/login", methods=["GET","POST"])
+@app.route("/login", methods=["POST"])
 def process_login():
     """Process user login."""
     #triggers when user enters in email and password
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
 
-        user = get_user_by_email(email)
-        #in the case of incorrect credentials
-        if not user or user.password != password:
-            flash("The email or password you entered was incorrect.")
-        else:
-            # stored the user's email in session object
-            session["user_email"] = user.email
-            flash(f"Welcome back, {user.username}!")
-            return redirect("/profile")
+    email = request.form.get("email")
+    password = request.form.get("password")
+
+    user = get_user_by_email(email)
+    #in the case of incorrect credentials
+    if not user or user.password != password:
+        flash("The email or password you entered was incorrect.")
+    else:
+        # stored the user's email in session object
+        session["user_email"] = user.email
+        session["user_id"] = user.user_id
+        flash(f"Welcome back, {user.username}!")
+        print(session["user_email"])
+        print("************************************************************************************")
+        return redirect("/profile")
     #if user cannot log in
     return redirect("/")
+
 @app.route("/profile")
 def profile():
     """Route to view user profile."""
@@ -80,11 +85,13 @@ def profile():
     email = session["user_email"]
     user = get_user_by_email(email)
 
+    tasks = get_tasks(session['user_id'])
+
     if not user:
         flash("User not found.")
         return redirect("/")
 
-    return render_template('profile.html', user=user)
+    return render_template('profile.html', tasks=tasks, user=user)
 
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
@@ -135,6 +142,26 @@ def logout():
         flash("You are logged out")
     #redirect to homepage
     return redirect("/")
+
+#view function for all user info
+@app.route("/api/user_info")
+def get_user_info():
+    #check if user is logged in
+    if "user_email" not in session:
+        return flash("user not logged in")
+
+    #grab user email from session and user object from db
+    email = session["user_email"]
+    user = get_user_by_email(email)
+
+    # jsonify searches db for user instance and constructs a json response if user is found
+    return jsonify({
+        "email": user.email,
+        "username": user.username,
+        "theme_preference": user.theme_preference,
+        "work_session_time": user.work_session_time,
+        "break_session_time": user.break_session_time
+    })
 
 if __name__ == "__main__":
     connect_to_db(app)

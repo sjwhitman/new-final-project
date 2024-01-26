@@ -16,9 +16,16 @@
       </p>
     {% endfor %}
 
+    {# For demo purposes, show our sessions #}
+{% if session %}
+    <label>Flask Session</label>
+    {{ session }}
+{% endif %}
+
     {% block body %}{% endblock %}
 
     {% block after_body %}{% endblock %}
+    <script src="{{ url_for('static', filename='frontend.js') }}"></script>
   </body>
 </html>
 

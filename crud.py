@@ -2,13 +2,15 @@ from model import User, Task, db, connect_to_db
 from flask import Flask, current_app
 
 # CRUD for tasks table
-def add_task(task_name):
-    new_task = Task(task_name=task_name)
+def add_task(task_name, task_description, timer_type, duration, user_id):
+    new_task = Task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=user_id)
     db.session.add(new_task)
     db.session.commit()
 
-def get_tasks():
-    return Task.query.all()
+def get_tasks(user_id):
+    #return list of tasks that match with user id 
+   
+    return Task.query.filter_by(user_id=user_id).all()
 
 def update_task(task_id, new_task_name):
     task = Task.query.get(task_id)

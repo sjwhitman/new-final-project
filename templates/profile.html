@@ -23,6 +23,40 @@
     </form>
 </div>
 
+
+
+
+
+<h2>Tasks</h2>
+<ul>
+  {% for task in tasks %}
+    <li>{{ task.task_name }} 
+      <form method="post" action="/delete_task/{{ task.task_id }}">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+
+<h2>Add Task</h2>
+<form method="post" action="/add_task">
+
+    <label for="task_name">Task Name:</label>
+    <input type="text" name="task_name" required>
+
+    <label for="task_description">Task Description</label>
+    <input type="text" name="task_description" required>
+
+    <label for="timer_type">Timer Type</label>
+    <input type="text" name="timer_type" required>
+
+    <!-- make sure task_duration is in db -->
+    <label for="duration">Task Duration</label>
+    <input type="number" name="duration" required>
+
+    <button type="submit">Add Task</button>
+</form>
+
 <div class="tasks-list">
         <h2>Saved Task List</h2>
         <ul>

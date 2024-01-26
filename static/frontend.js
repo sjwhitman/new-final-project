@@ -1,4 +1,3 @@
-alert("JS is importing into the html page")
 
    // displays the countdown when inserted into HTML element
 function formatTime(days, hours, minutes, seconds) {

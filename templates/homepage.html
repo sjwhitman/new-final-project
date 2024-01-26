@@ -4,7 +4,7 @@
   {% block body %}
     <h1>Task Timer</h1>
   
-    <h2>Tasks</h2>
+    <!-- <h2>Tasks</h2>
     <ul>
       {% for task in tasks %}
         <li>{{ task.task_name }} 
@@ -13,14 +13,14 @@
           </form>
         </li>
       {% endfor %}
-    </ul>
+    </ul> -->
   
-    <h2>Add Task</h2>
+    <!-- <h2>Add Task</h2>
     <form method="post" action="/add_task">
       <label for="task_name">Task Name:</label>
       <input type="text" name="task_name" required>
       <button type="submit">Add Task</button>
-    </form>
+    </form> -->
 
     <h2>Create an Account</h2>
     <form action="/create_user" method="POST">
@@ -41,17 +41,14 @@
         <p> <input type="submit"></p>
     </form>
 
-  <!-- Allow the user to enter a countdown time -->
+  <!--user to enters a countdown time in datetime input tag -->
   <h2>Enter Countdown Time</h2>
   <input type="datetime-local" id="countdown-input">
 
-  <!-- Display the countdown in an element -->
+  <!--dynamically generated countdown element -->
   <div id="timer"></div>
 
-  <!-- Include the JavaScript file -->
   <!-- <script src="/static/frontend.js"></script> -->
-  <!-- <script src="{{ url_for('static', filename='frontend.js') }}"></script> -->
-  <script src="{{ url_for('static', filename='frontend.js') }}"></script>
 {% endblock %}
 
 
