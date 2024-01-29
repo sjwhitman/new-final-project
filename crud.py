@@ -6,6 +6,7 @@ def add_task(task_name, task_description, timer_type, duration, user_id):
     new_task = Task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=user_id)
     db.session.add(new_task)
     db.session.commit()
+    return new_task
 
 def get_tasks(user_id):
     #return list of tasks that match with user id 

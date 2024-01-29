@@ -26,3 +26,35 @@
     //         breakSessionTimeBlock.textContent = `Break Session Time: ${userData.break_session_time} minutes`;
     //     }
     // }
+
+    // // call the fetch function only after the page has loaded
+    // fetchUserInfo();
+    //async function returns promise which resolves to task data, then passes that data to update html
+    async function fetchTasks() {
+        try {
+            //wait for task data as json from flask instance
+            const response = await fetch('/get_tasks');
+            const taskData = await response.json();
+            
+            //update the task list in the HTML with updateTaskList
+            updateTaskList(taskData);
+        } catch (error) {
+            console.error('task list unfetchable');
+        }
+    }
+
+    // function to update profile.html by div class "tasks-list"
+    function updateTaskList(taskData) {
+        const tasksList = document.querySelector('.tasks-list ul');
+
+        // populate task list with fetched tasks
+        taskData.forEach(task => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${task.task_name} - ${task.timer_type} (${task.duration} seconds)`;
+            tasksList.appendChild(listItem);
+        });
+    }
+
+    // populate html task list every time the dom object finishes loading
+    fetchTasks();
+

@@ -3,31 +3,7 @@
   
   {% block body %}
 
-<h1>User Profile</h1>
-<!-- planning to style in css later -->
-<div class="profile-info">
-    <form action="/update_profile" method="POST">
-        <label for="theme_preference">Theme Preference:</label>
-        <input type="text" name="theme_preference" value="{{ user.theme_preference }}"><br>
-
-        <label for="work_session_time">Work Time Interval (minutes):</label>
-        <input type="number" name="work_session_time" value="{{ user.work_session_time }}"><br>
-
-        <label for="break_session_time">Break Time Interval (minutes):</label>
-        <input type="number" name="break_session_time" value="{{ user.break_session_time }}"><br>
-
-        <label for="password">New Password:</label>
-        <input type="password" name="password"><br>
-
-        <input type="submit" value="Update Profile">
-    </form>
-</div>
-
-
-
-
-
-<h2>Tasks</h2>
+<!-- <h2>Tasks</h2>
 <ul>
   {% for task in tasks %}
     <li>{{ task.task_name }} 
@@ -36,36 +12,74 @@
       </form>
     </li>
   {% endfor %}
+</ul> -->
+<h2>Countdown Timer</h2>
+<div id="countdown-timer">00:00</div>
+<button id="start-timer-btn">Start Timer</button>
+<button id="stop-timer-btn">Stop Timer</button>
+
+<h2>Tasks</h2>
+<ul id="tasks-list">
+  {% for task in tasks %}
+    <li>
+      <strong>Task Name:</strong> {{ task.task_name }} <br>
+      <strong>Task Description:</strong> {{ task.task_description }} <br>
+      <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
+      <form method="post" action="/delete_task/{{ task.task_id }}">
+        <button type="submit">Delete</button>
+      </form>
+    </li>
+  {% endfor %}
 </ul>
 
 <h2>Add Task</h2>
-<form method="post" action="/add_task">
+<form method="post" id="add_task_form">
 
     <label for="task_name">Task Name:</label>
-    <input type="text" name="task_name" required>
+    <input type="text" name="task_name" id="name_input" required>
 
     <label for="task_description">Task Description</label>
-    <input type="text" name="task_description" required>
+    <input type="text" name="task_description" id="description_input" required>
 
     <label for="timer_type">Timer Type</label>
-    <input type="text" name="timer_type" required>
+    <input type="text" name="timer_type" id="type_input" required>
 
     <!-- make sure task_duration is in db -->
     <label for="duration">Task Duration</label>
-    <input type="number" name="duration" required>
+    <input type="number" name="duration" id="duration_input" required>
 
     <button type="submit">Add Task</button>
 </form>
 
-<div class="tasks-list">
+
+<!-- <div class="tasks-list">
         <h2>Saved Task List</h2>
-        <ul>
+        <ol>
             {% for task in user.tasks %}
-            <!-- display every item in saved task list -->
                 <li>{{ task.task_name }} - {{ task.timer_type }} ({{ task.duration }} seconds)</li>
             {% endfor %}
-        </ul>
-    </div>
+        </ol>
+    </div> -->
+
+  <h1>User Profile</h1>
+  <!-- planning to style in css later -->
+  <div class="profile-info">
+      <form action="/update_profile" method="POST">
+          <label for="theme_preference">Theme Preference:</label>
+          <input type="text" name="theme_preference" value="{{ user.theme_preference }}"><br>
+  
+          <label for="work_session_time">Work Time Interval (minutes):</label>
+          <input type="number" name="work_session_time" value="{{ user.work_session_time }}"><br>
+  
+          <label for="break_session_time">Break Time Interval (minutes):</label>
+          <input type="number" name="break_session_time" value="{{ user.break_session_time }}"><br>
+  
+          <label for="password">New Password:</label>
+          <input type="password" name="password"><br>
+  
+          <input type="submit" value="Update Profile">
+      </form>
+  </div>
     
 <h2>Log Out</h2>
 <!-- Needs a button with an event listener or a form with a submit  -->
@@ -75,5 +89,6 @@
 </form>
    
 <p><a href="/">Back to Homepage</a></p>
-    
+
+<script src="/static/profile.js"></script>
 {% endblock %}

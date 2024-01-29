@@ -16,12 +16,22 @@ def homepage():
 #routes for task list
 @app.route("/add_task", methods=['POST'])
 def add_tasks_route():
-    task_name = request.form.get('task_name')
-    task_description = request.form.get('task_description')
-    timer_type = request.form.get('timer_type')
-    duration = request.form.get('duration')
-    add_task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=session['user_id'])
-    return redirect('/profile')
+    task_name = request.json.get('task_name')
+    task_description = request.json.get('task_description')
+    timer_type = request.json.get('timer_type')
+    duration = request.json.get('duration')
+    #add task to db
+    object_name = add_task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=session['user_id'])
+    
+    #turn info into dictionary so it can be used with jsonify
+    task_info = {
+            "task_id": object_name.task_id,
+            "task_name": object_name.task_name,
+            "task_description": object_name.task_description,
+            "timer_type": object_name.timer_type,
+            "duration": object_name.duration
+        }
+    return jsonify(task_info)
 
 @app.route("/delete_task/<int:task_id>", methods=['POST'])
 def delete_task_route(task_id):
@@ -90,8 +100,9 @@ def profile():
     if not user:
         flash("User not found.")
         return redirect("/")
-
+    
     return render_template('profile.html', tasks=tasks, user=user)
+    # return render_template('profile.html', tasks=tasks, user=user)
 
 @app.route("/update_profile", methods=["POST"])
 def update_profile():
@@ -130,6 +141,7 @@ def update_profile():
     db.session.commit()
     flash("Profile updated successfully.")
     return redirect("/profile")
+    
 @app.route("/logout", methods=["POST"])
 def logout():
     #get the user info fromm the session
@@ -162,6 +174,34 @@ def get_user_info():
         "work_session_time": user.work_session_time,
         "break_session_time": user.break_session_time
     })
+
+@app.route("/get_tasks", methods=['GET'])
+#used get instead of post
+def get_tasks_route():
+    """Fetch tasks for the logged-in user."""
+    if "user_id" not in session:
+        return jsonify([])  # Return an empty list if the user is not logged in
+
+    #get user_id from session object
+    user_id = session["user_id"]
+
+    #get tasks by selecting via user id
+    tasks = get_tasks(user_id)
+
+    # store data as list
+    task_data = []
+    for task in tasks:
+        task_info = {
+            "task_id": task.task_id,
+            "task_name": task.task_name,
+            "task_description": task.task_description,
+            "timer_type": task.timer_type,
+            "duration": task.duration
+        }
+    task_data.append(task_info)
+
+    #return task data as json
+    return jsonify(task_data)
 
 if __name__ == "__main__":
     connect_to_db(app)

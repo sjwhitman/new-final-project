@@ -29,3 +29,45 @@ Next steps:
 #consider adding ajax to task add/delete functionality 
 
 Possible extra - use JavaScript sessionStorage to make login-less version of task manager
+
+(not correct, add your curly brackets and stuff)
+<ol>
+for task in tasks
+<ul>
+    <h1>task.task_name</h1>
+    <li>task.task_description</li>
+
+</ul>
+endfor
+</ol>
+
+
+
+JS - 
+
+-in html, style task list as desired (bring back the ones with the delete button)
+    in profile.html, bring back lines 27-35, and give the <ul> an id
+    in profile.html, comment out lines 57 - 64
+- back in profile.JS
+    -in that spot with our notes, select the <ul> by id, and we'll insertAdjacentHTML into it 'beforeend'
+    -You'll use the results we passed through to create the html string we're inserting
+    -Here's a syntax example below, but select by the id you gave the <ul>
+
+        document.querySelector('ul').insertAdjacentHTML('beforeend', '<li>Finish homework</li>');
+
+    - And the html string you give it will look like the example below, and use back ticks so you can put some variables in the string
+
+        <li>${results.task_name} <form method="post" action="/delete_task/${results.task_id}"> <button type="submit">Delete</button> </form> </li>
+
+    (The string is a match for the html in profile.html)
+
+Give this a go, and if it doesn't work, there's no need to stress, we can finish it together on Monday.
+Just plan to have some energy on Monday for us to work some more. 
+You got this!  You've made some good progress this week
+
+
+
+//  the html element that displays the list of tasks will need an id 
+//     actually, it looks like you switched which task list you're displaying.  Looks like it's no longer the one with the delete
+//     so I'll pop some more thorough notes in the notes.txt
+//     this is where you'll add the js stuff.  
