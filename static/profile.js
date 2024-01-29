@@ -9,7 +9,7 @@ var formInputs = {
     type_input: document.querySelector("#type_input").value,
     duration_input: document.querySelector("#duration_input").value
 }
-
+console.log(formInputs)
 
 fetch("/add_task",  {
     method: 'POST',
@@ -25,16 +25,7 @@ fetch("/add_task",  {
     // select by the id "tasks-list"
     const tasksList = document.getElementById('tasks-list');
     //use insertAdjacentHTML
-    tasksList.insertAdjacentHTML('beforeend', `
-    <li>
-        <strong>Task Name:</strong> ${taskData.task_name} <br>
-        <strong>Task Description:</strong> ${taskData.task_description} <br>
-        <strong>Timer Duration:</strong> ${taskData.duration} seconds <br>
-        <form method="post" action="/delete_task/${taskData.task_id}">
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    `);
+    tasksList.insertAdjacentHTML('beforeend', `<li> <strong>Task Name:</strong> ${results.task_name} <br> <strong>Task Description:</strong> ${results.task_description} <br> <strong>Timer Duration:</strong> ${results.duration} seconds <br> <form method="post" action="/delete_task/${results.task_id}"> <button type="submit">Delete</button> </form> </li>`);
   });
 });
 
@@ -47,6 +38,17 @@ document.addEventListener('DOMContentLoaded', function () {
       .then(user => {
           // Set up the countdown timer based on work_session_time
           setupCountdownTimer(user.work_session_time);
+
+          //listen for work/break toggle
+            // Add event listeners to toggle between work and break sessions
+            document.getElementById('work-session-btn').addEventListener('click', function () {
+              setupCountdownTimer(user.work_session_time);
+          });
+
+          //fill timer with break_session_time value instead
+          document.getElementById('break-session-btn').addEventListener('click', function () {
+              setupCountdownTimer(user.break_session_time);
+          });
       })
     });
 
