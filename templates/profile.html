@@ -22,18 +22,19 @@
 <button id="break-session-btn">Break Session</button>
 
 <h2>Tasks</h2>
-<ul id="tasks-list">
+<div class="tasks-container">
   {% for task in tasks %}
-    <li>
+    <div class="task-card">
       <strong>Task Name:</strong> {{ task.task_name }} <br>
       <strong>Task Description:</strong> {{ task.task_description }} <br>
       <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
       <form method="post" action="/delete_task/{{ task.task_id }}">
         <button type="submit">Delete</button>
       </form>
-    </li>
+    </div>
   {% endfor %}
-</ul>
+</div>
+
 
 <h2>Add Task</h2>
 <form method="post" id="add_task_form">

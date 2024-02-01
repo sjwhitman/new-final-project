@@ -58,3 +58,6 @@
     // populate html task list every time the dom object finishes loading
     fetchTasks();
 
+
+//for light/dark mode
+    // <!-- <body class="{{ user.theme_preference }}"> -->

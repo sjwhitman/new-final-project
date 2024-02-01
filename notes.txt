@@ -71,3 +71,19 @@ You got this!  You've made some good progress this week
 //     actually, it looks like you switched which task list you're displaying.  Looks like it's no longer the one with the delete
 //     so I'll pop some more thorough notes in the notes.txt
 //     this is where you'll add the js stuff.  
+
+
+Bootstrap and Baby Timers
+    1. first add the bootstrap, get each task displaying on a card in a grid
+    2. add baby timer to each card
+
+Light/Dark mode 
+    1. On account signup, change theme_preference from text input to dropdown because you'll be writing conditionals like "if theme_preference == "ocean": do the ocean thing"
+
+    on login, theme_preference is added to session object.  on each page, jinja conditionals select which css file (you will have one per theme) gets used 
+
+    size_and_format.css (everywhere)
+
+    (in jinja conditionals)
+    light.css (light theme colors)
+    dark.css (dark theme colors)

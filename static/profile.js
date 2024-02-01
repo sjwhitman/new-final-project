@@ -25,7 +25,7 @@ fetch("/add_task",  {
     // select by the id "tasks-list"
     const tasksList = document.getElementById('tasks-list');
     //use insertAdjacentHTML
-    tasksList.insertAdjacentHTML('beforeend', `<li> <strong>Task Name:</strong> ${results.task_name} <br> <strong>Task Description:</strong> ${results.task_description} <br> <strong>Timer Duration:</strong> ${results.duration} seconds <br> <form method="post" action="/delete_task/${results.task_id}"> <button type="submit">Delete</button> </form> </li>`);
+    tasksList.insertAdjacentHTML('beforeend', `<li> <strong>Task Name:</strong> ${results.task_name} <br> <strong>Task Description:</strong> ${results.task_description} <br> <strong>Timer Duration:</strong> ${results.duration} seconds <br> <form method="post" action="/delete_task/${result.task_id}"> <button type="submit">Delete</button> </form> </li>`);
   });
 });
 

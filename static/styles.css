@@ -1,3 +1,14 @@
+/* light mode */
+body.light {
+    background-color: #fff;
+    color: #333;
+}
+
+/* dark Mode */
+body.dark {
+    background-color: #333;
+    color: #fff;
+}
 .tasks-list {
     margin-top: 20px;
 }
@@ -11,3 +22,18 @@
     list-style-type: none;
     padding: 2px;
 }
+
+.tasks-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .task-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    width: 300px;
+  }

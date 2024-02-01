@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     {% block head %}{% endblock %}
   </head>
-  <body>
+  <!-- first, check if user theme_preference is in session object and if it is set to light, and set class to light -->
+  <!-- if theme_preference is in session and is "dark" or any other string, render dark mode -->
+  <!-- if theme preference not present in session object, render 'light as default' -->
+  <body class="{% if 'theme_preference' in session %}{% if session['theme_preference'] == 'light' %}
+  light{% else %}dark{% endif %}{% else %}light{% endif %}">
     {% for msg in get_flashed_messages() %}
       <p class="flash-msg">
         {{ msg }}
@@ -17,16 +21,43 @@
     {% endfor %}
 
     {# For demo purposes, show our sessions #}
-{% if session %}
-    <label>Flask Session</label>
-    {{ session }}
-{% endif %}
+    {% if session %}
+        <label>Flask Session</label>
+        {{ session }}
+    {% endif %}
 
     {% block body %}{% endblock %}
 
     {% block after_body %}{% endblock %}
-    
+
+    <!-- light/dark Mode Toggle Button -->
+    <button id="theme-toggle-btn">Toggle Theme</button>
+
+    <script>
+      // select toggle button and call toggleTheme on user click
+      document.getElementById('theme-toggle-btn').addEventListener('click', function () {
+        toggleTheme();
+      });
+
+      //function to interact with jinja block in body class attribute
+      function toggleTheme() {
+        //invoke dom object and store body element
+        let body = document.body;
+        // check if the 'light' is the current class assigned in the body tag
+        //use classList property to interact with class
+        if (body.classList.contains('light')) {
+          // if class = light, replace it with dark
+          body.classList.remove('light');
+          body.classList.add('dark');
+        } else {
+          // if 'light' is not present replace it with light
+          body.classList.remove('dark');
+          body.classList.add('light');
+        }
+      }
+    </script>
   </body>
 </html>
 
 <!-- link script tag  -->
+<script src="{{ url_for('static', filename='frontend.js') }}"></script>

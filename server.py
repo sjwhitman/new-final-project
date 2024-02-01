@@ -120,11 +120,8 @@ def update_profile():
     user = get_user_by_email(email)
 
     # update user db from form
-    # user.theme_preference = request.form.get("theme_preference")
-    # # user.work_session_time = int(request.form.get("work_session_time"))
-    # # user.break_session_time = int(request.form.get("break_session_time"))
-
-    # Update password if provided
+   
+    # update password if provided
     new_password = request.form.get("password")
     if new_password:
         user.password = new_password
