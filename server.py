@@ -197,6 +197,7 @@ def get_tasks_route():
             "task_name": task.task_name,
             "task_description": task.task_description,
             "timer_type": task.timer_type,
+            "timer_number": task.timer_number,
             "duration": task.duration
         }
     task_data.append(task_info)

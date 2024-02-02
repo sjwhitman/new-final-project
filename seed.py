@@ -28,6 +28,7 @@ task1 = model.Task(
     task_description="Clean those floors!",
     timer_type = "task",
     duration=(3600),
+    timer_number = 1,
     user_id=1
 )
 

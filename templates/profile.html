@@ -3,16 +3,6 @@
   
   {% block body %}
 
-<!-- <h2>Tasks</h2>
-<ul>
-  {% for task in tasks %}
-    <li>{{ task.task_name }} 
-      <form method="post" action="/delete_task/{{ task.task_id }}">
-        <button type="submit">Delete</button>
-      </form>
-    </li>
-  {% endfor %}
-</ul> -->
 <h2>Countdown Timer</h2>
 <div id="countdown-timer">00:00</div>
 <button id="start-timer-btn">Start Timer</button>
@@ -31,6 +21,8 @@
       <form method="post" action="/delete_task/{{ task.task_id }}">
         <button type="submit">Delete</button>
       </form>
+      <button class="start-task-btn" data-task-id="{{ task.task_id }}">Start Task</button>
+      <button class="stop-task-btn" data-task-id="{{ task.task_id }}">Stop Task</button>
     </div>
   {% endfor %}
 </div>
@@ -54,16 +46,6 @@
 
     <button type="submit">Add Task</button>
 </form>
-
-
-<!-- <div class="tasks-list">
-        <h2>Saved Task List</h2>
-        <ol>
-            {% for task in user.tasks %}
-                <li>{{ task.task_name }} - {{ task.timer_type }} ({{ task.duration }} seconds)</li>
-            {% endfor %}
-        </ol>
-    </div> -->
 
   <h1>User Profile</h1>
   <!-- planning to style in css later -->

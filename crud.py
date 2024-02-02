@@ -2,8 +2,8 @@ from model import User, Task, db, connect_to_db
 from flask import Flask, current_app
 
 # CRUD for tasks table
-def add_task(task_name, task_description, timer_type, duration, user_id):
-    new_task = Task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=user_id)
+def add_task(task_name, task_description, timer_type, duration, timer_number, user_id):
+    new_task = Task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, timer_number=timer_number, user_id=user_id)
     db.session.add(new_task)
     db.session.commit()
     return new_task
