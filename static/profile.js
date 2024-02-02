@@ -10,6 +10,7 @@ document
       description_input: document.querySelector("#description_input").value,
       type_input: document.querySelector("#type_input").value,
       duration_input: document.querySelector("#duration_input").value,
+      timer_number: document.querySelector("#timer_number").value,
     };
     console.log(formInputs);
 
@@ -58,16 +59,33 @@ document.addEventListener("DOMContentLoaded", function () {
         .addEventListener("click", function () {
           setupCountdownTimer(user.break_session_time);
         });
+
+      // Iterate over each task card and add event listeners
+      document.querySelectorAll(".start-task-btn").forEach((startBtn) => {
+        const taskId = startBtn.dataset.taskId;
+        const task = tasks.find((task) => task.task_id === parseInt(taskId));
+
+        startBtn.addEventListener("click", function () {
+          // Start the timer with the task's work session time and timer_number
+          setupCountdownTimer(task.duration, task.timer_number);
+        });
+      });
+
+      // Add event listeners for stop buttons
+      document.querySelectorAll(".stop-task-btn").forEach((stopBtn) => {
+        stopBtn.addEventListener("click", stopTimer);
+      });
     });
 });
 
 //using work_session_time fetched from last function
-function setupCountdownTimer(minutes) {
+function setupCountdownTimer(minutes, timer_number = 2) {
   let timerElement = document.getElementById("countdown-timer");
 
   let totalTimeInSeconds = minutes * 60; // lets user enter time as minutes
   //add container to later store return value from setInterval
   let timerInterval = null;
+  let remainingCycles = timer_number;
 
   //format remaining time and update "countdown-timer"
   function updateTimerDisplay() {
@@ -86,12 +104,23 @@ function setupCountdownTimer(minutes) {
   function startTimer() {
     timerInterval = setInterval(function () {
       //keep timer updating as long as it is still counting down
-      if (totalTimeInSeconds > 0) {
+      if (totalTimeInSeconds > 0 && remainingCycles > 0) {
         totalTimeInSeconds--;
         updateTimerDisplay();
       } else {
         // clear timer when its finished
         clearInterval(timerInterval);
+
+        // alert the user when the timer completes all cycles
+        if (remainingCycles === 0) {
+          alert(`Time's up for ${task_name}!`);
+        }
+        //refill timer if still cycles to complete
+        if (remainingCycles > 0) {
+          remainingCycles--;
+          totalTimeInSeconds = minutes * 60;
+          startTimer();
+        }
       }
     }, 1000); // update every 1000 milliseconds, or every second
   }
