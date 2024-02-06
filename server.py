@@ -20,10 +20,13 @@ def add_tasks_route():
     task_description = request.json.get('description_input')
     timer_type = request.json.get('type_input')
     duration = request.json.get('duration_input')
+    timer_number = request.json.get('timer_number_input')
     print("Form info from AJAX call *****************************************************************")
     print(task_name, task_description, timer_type, duration)
+    print(type(duration))
+    print(timer_number)
     #add task to db
-    object_name = add_task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, user_id=session['user_id'])
+    object_name = add_task(task_name=task_name, task_description=task_description, timer_type=timer_type, duration=duration, timer_number=timer_number, user_id=session['user_id'])
     
     #turn info into dictionary so it can be used with jsonify
     task_info = {
@@ -31,7 +34,8 @@ def add_tasks_route():
             "task_name": object_name.task_name,
             "task_description": object_name.task_description,
             "timer_type": object_name.timer_type,
-            "duration": object_name.duration
+            "duration": object_name.duration,
+            "timer_number": object_name.timer_number
         }
     print("Our dictionary")
     print(task_info)

@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+  {% set tasksMan = tasks %}
   {% block title %}Task Timer Home{% endblock %}
   
   {% block body %}
@@ -14,15 +15,17 @@
 <h2>Tasks</h2>
 <div class="tasks-container">
   {% for task in tasks %}
-    <div class="task-card">
+    <div id="tasks-list">
       <strong>Task Name:</strong> {{ task.task_name }} <br>
       <strong>Task Description:</strong> {{ task.task_description }} <br>
-      <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
+      <strong>Timer Duration:</strong>
+        <span id="duration-{{ task.task_id}}">{{ task.duration }}</span> seconds <br>
+      <strong># of Timers:</strong> {{ task.timer_number }} <br>
       <form method="post" action="/delete_task/{{ task.task_id }}">
         <button type="submit">Delete</button>
       </form>
-      <button class="start-task-btn" data-task-id="{{ task.task_id }}">Start Task</button>
-      <button class="stop-task-btn" data-task-id="{{ task.task_id }}">Stop Task</button>
+      <button class="start-task-btn" data-task-id="{{ task.task_id }}" onClick="startTask({{ task.task_id }})">Start Task</button>
+      <button class="stop-task-btn" data-task-id="{{ task.task_id }}" onClick="stopTask({{ task.task_id }})">Stop Task</button>
     </div>
   {% endfor %}
 </div>
@@ -72,7 +75,7 @@
 <h2>Log Out</h2>
 <!-- Needs a button with an event listener or a form with a submit  -->
 <form action="/logout" method="POST">
-    <label for="logout">Logout?</label>
+    <label for="logout"></label>
     <input type="submit" value="Logout?">
 </form>
    

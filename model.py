@@ -11,7 +11,7 @@ class Task(db.Model):
     task_description = db.Column(db.String(200))
     timer_type = db.Column(db.String(10)) # 'break' or 'task'
     duration = db.Column(db.Integer) #stored in seconds
-    timer_number = db.Column(db.Integer, nullable = True)
+    timer_number = db.Column(db.Integer, nullable = True) # number of timer cycles for a task
     user_id = db.Column(db.Integer(), db.ForeignKey('users.user_id'))
     user = db.relationship('User', back_populates="tasks")
 
