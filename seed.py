@@ -20,7 +20,14 @@ user1 = model.User(
     password="notSecure51"
 )
 
+user2 = model.User(
+    username="testuser3",
+    email="testemail3@email.com",
+    password="testpassword3"
+)
+
 model.db.session.add(user1)
+model.db.session.add(user2)
 model.db.session.commit()
 
 task1 = model.Task(

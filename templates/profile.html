@@ -22,7 +22,7 @@
 <button id="break-session-btn">Break Session</button>
 
 <h2>Tasks</h2>
-<div class="tasks-container">
+<div class="tasks-container" id="tasks-list">
   {% for task in tasks %}
     <div class="task-card">
       <strong>Task Name:</strong> {{ task.task_name }} <br>
