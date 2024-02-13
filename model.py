@@ -10,7 +10,7 @@ class Task(db.Model):
     task_name = db.Column(db.String(50), nullable=False)
     task_description = db.Column(db.String(200))
     timer_type = db.Column(db.String(10)) # 'break' or 'task'
-    duration = db.Column(db.Integer) #stored in seconds
+    duration = db.Column(db.String(100)) 
     user_id = db.Column(db.Integer(), db.ForeignKey('users.user_id'))
     user = db.relationship('User', back_populates="tasks")
 

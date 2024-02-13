@@ -18,7 +18,7 @@
   <div class="task-card">
     <strong>Task Name:</strong> {{ task.task_name }} <br>
     <strong>Task Description:</strong> {{ task.task_description }} <br>
-    <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
+    <strong>Task Duration:</strong> {{ task.duration }} <br>
     <form method="post" action="/delete_task/{{ task.task_id }}">
       <button type="submit" class="button">Delete</button>
     </form>
@@ -28,6 +28,7 @@
 
 
 <!-- for both forms -->
+
 <div class="forms-container">
   <!-- task form -->
   <div class="add-task-form-container">
@@ -43,7 +44,7 @@
           <input type="text" name="timer_type" id="type_input" class="input-field" required>
 
           <label for="duration">Task Duration</label>
-          <input type="number" name="duration" id="duration_input" class="input-field" required>
+          <input type="text" name="duration" id="duration_input" class="input-field" required>
 
           <button type="submit" class="button">Add Task</button>
       </form>

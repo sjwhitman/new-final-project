@@ -1,8 +1,11 @@
-light mode
+body {
+    margin: 20px; /* Adjust the margin value as needed */
+}
 
 body.light {
-    background-color: #fff;
-    color: #333;
+    background-color: #ffffff;
+    background-image: url("../static/diamond-sunset.svg");
+    background-attachment: fixed;
 }
 
 /* dark Mode */
@@ -20,6 +23,10 @@ body.dark {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
 .button:hover {
@@ -39,7 +46,9 @@ body.dark {
 .tasks-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
+    padding-top: 10px;
 }
 
 .task-card {
@@ -72,6 +81,7 @@ body.dark {
     margin: 0 auto; /* center */
     width: 80%; 
     max-width: 600px; /* for desktop */
+    margin-bottom: 20px;
 }
 
 
@@ -92,6 +102,7 @@ body.dark {
 h2 {
     text-align: center; /* center align "countdown timer" */
     margin-bottom: 20px; /* add bottom margin for spacing */
+    margin-top: 20px;
 }
 
 .input-field {
@@ -103,10 +114,13 @@ h2 {
 }
 
 /* additional styling for forms container and form columns */
-/* .forms-container {
-    display: flex;
-    justify-content: space-between;
-} */
+.forms-container {
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    font-size: 20px;
+    /* height: 50vh; */
+}
 
 .add-task-form-container {
     flex: 1; /* should take all remaining space? */
@@ -124,6 +138,7 @@ h2 {
     display: flex; /* Display the buttons in a row */
     justify-content: flex-end; /* Align buttons to the right */
     gap: 10px; /* Add space between buttons */
+    margin-bottom: 20px;
 }
 
 
@@ -155,9 +170,9 @@ h2 {
 
 }
 
-/* Sign-in and Sign-up forms styling */
 .signin-form,
 .signup-form {
+    font-size: 20px;
     text-align: center; /* Center align the content */
 }
 
@@ -168,8 +183,11 @@ h2 {
     width: 100%; /* Make input fields fill the container */
     padding: 10px;
     margin-bottom: 10px;
+    font-size: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-top: 10px;
+    
 }
 
 .signin-form input[type="submit"],
@@ -182,11 +200,13 @@ h2 {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 20px;
 }
 
 .signin-form input[type="submit"]:hover,
 .signup-form input[type="submit"]:hover {
     background-color: #45a049;
+    font-size: 20px;
 }
 
 .col{
