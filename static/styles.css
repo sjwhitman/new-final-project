@@ -4,7 +4,7 @@ body {
 
 body.light {
     background-color: #ffffff;
-    background-image: url("../static/diamond-sunset.svg");
+    background-image: url("../static/spectrum-gradient.svg");
     background-attachment: fixed;
 }
 
@@ -12,6 +12,22 @@ body.light {
 body.dark {
     background-color: #333;
     color: #fff;
+}
+
+/* Specify black text color for task cards in dark mode */
+body.dark .task-card {
+    color: #000;
+}
+
+/* Specify black text color for countdown timer in dark mode */
+body.dark #countdown-timer {
+    color: #000;
+}
+
+/* Logo styling */
+.logo img {
+    width: 500px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
 /* button styling */
@@ -146,7 +162,7 @@ h2 {
     display:flex;
     justify-content:center;
     align-items: center;
-    height: 95vh;
+    height: 60vh;
     
 }
 
