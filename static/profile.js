@@ -11,7 +11,7 @@ document
       type_input: document.querySelector("#type_input").value,
       duration_input: document.querySelector("#duration_input").value,
     };
-    console.log(formInputs);
+    //console.log(formInputs);
 
     fetch("/add_task", {
       method: "POST",
@@ -114,4 +114,28 @@ function setupCountdownTimer(minutes) {
   document
     .getElementById("stop-timer-btn")
     .addEventListener("click", stopTimer);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // add event listener to the theme dropdown menu
+  document.getElementById("theme").addEventListener("change", function () {
+    // get the selected theme value
+    var selectedTheme = this.value;
+
+    // call a function to update the theme
+    updateTheme(selectedTheme);
+  });
+});
+
+function updateTheme(theme) {
+  // update the theme based on the selected value
+  if (theme === "light") {
+    document.body.classList.remove("dark");
+    document.body.classList.add("light");
+  } else if (theme === "dark") {
+    document.body.classList.remove("light");
+    document.body.classList.add("dark");
+  }
+
+  // you can also save the selected theme to the user's profile preferences via an AJAX request here
 }

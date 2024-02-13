@@ -2,54 +2,49 @@
   {% block title %}Task Timer Home{% endblock %}
   
   {% block body %}
-    <h1>Task Timer</h1>
+  <h1>Task Timer</h1>
+<div class="container homepage">
   
-    <!-- <h2>Tasks</h2>
-    <ul>
-      {% for task in tasks %}
-        <li>{{ task.task_name }} 
-          <form method="post" action="/delete_task/{{ task.task_id }}">
-            <button type="submit">Delete</button>
-          </form>
-        </li>
-      {% endfor %}
-    </ul> -->
-  
-    <!-- <h2>Add Task</h2>
-    <form method="post" action="/add_task">
-      <label for="task_name">Task Name:</label>
-      <input type="text" name="task_name" required>
-      <button type="submit">Add Task</button>
-    </form> -->
+  <div class ="row frame">
+    <div class = "col">
+      <div class="signin-form">
+        <h2> Login</h2>
+        <form action="/login" method="POST">
+            <p>Email <input type="text" name="email"></p>
+            <p>Password <input type="password" name="password"></p>
+            <p> <input type="submit"></p>
+        </form>
+      </div>
+    </div>
 
-    <h2>Create an Account</h2>
-    <form action="/create_user" method="POST">
-        <p>Email <input type="text" name="email"></p>
-        <p>Password <input type="text" name="password"></p>
-        <p>Username <input type="text" name="username"></p>
-        <p>Theme Preference <input type="text" name="theme_preference"></p>
-        <p>Work Session Length <input type="text" name="work_session_time"></p>
-        <p>Break Session Length <input type="text" name="break_session_time"></p>
-        <p><input type="submit"></p>
-    </form>
+    <div class ="col dividing-line">
+      <div class="forms-container">
+        <div class="signup-form">
+        <h2>Create an Account</h2>
+        <form action="/create_user" method="POST">
+            <p>Email <input type="text" name="email"></p>
+            <p>Password <input type="text" name="password"></p>
+            <p>Username <input type="text" name="username"></p>
+            <p>Theme Preference <input type="text" name="theme_preference"></p>
+            <p>Work Session Length <input type="text" name="work_session_time"></p>
+            <p>Break Session Length <input type="text" name="break_session_time"></p>
+            <p><input type="submit"></p>
+        </form>
+        </div>
+      </div>
+    </div>
 
-   
-    <h2> Login</h2>
-    <form action="/login" method="POST">
-        <p>Email <input type="text" name="email"></p>
-        <p>Password <input type="password" name="password"></p>
-        <p> <input type="submit"></p>
-    </form>
-
-  <!--user to enters a countdown time in datetime input tag -->
+  <!-- user to enters a countdown time in datetime input tag
   <h2>Enter Countdown Time</h2>
   <input type="datetime-local" id="countdown-input">
 
-  <!--dynamically generated countdown element -->
-  <div id="timer"></div>
+  dynamically generated countdown element -->
+  <!-- <div id="timer"></div> -->
 
   <!-- <script src="/static/frontend.js"></script> -->
   <script src="{{ url_for('static', filename='frontend.js') }}"></script>
+  </div>
+</div>
 {% endblock %}
 
 

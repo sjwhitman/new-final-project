@@ -1,98 +1,90 @@
 {% extends 'base.html' %}
-  {% block title %}Task Timer Home{% endblock %}
-  
-  {% block body %}
+{% block title %}Task Timer Home{% endblock %}
 
-<!-- <h2>Tasks</h2>
-<ul>
-  {% for task in tasks %}
-    <li>{{ task.task_name }} 
-      <form method="post" action="/delete_task/{{ task.task_id }}">
-        <button type="submit">Delete</button>
-      </form>
-    </li>
-  {% endfor %}
-</ul> -->
+{% block body %}
+
 <h2>Countdown Timer</h2>
 <div id="countdown-timer">00:00</div>
-<button id="start-timer-btn">Start Timer</button>
-<button id="stop-timer-btn">Stop Timer</button>
-
-<button id="work-session-btn">Work Session</button>
-<button id="break-session-btn">Break Session</button>
+<div class="countdown-buttons">
+<button id="start-timer-btn" class="button">Start Timer</button>
+<button id="stop-timer-btn" class="button">Stop Timer</button>
+<button id="work-session-btn" class="button">Work Session</button>
+<button id="break-session-btn" class="button">Break Session</button>
+</div>
 
 <h2>Tasks</h2>
 <div class="tasks-container" id="tasks-list">
   {% for task in tasks %}
-    <div class="task-card">
-      <strong>Task Name:</strong> {{ task.task_name }} <br>
-      <strong>Task Description:</strong> {{ task.task_description }} <br>
-      <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
-      <form method="post" action="/delete_task/{{ task.task_id }}">
-        <button type="submit">Delete</button>
-      </form>
-    </div>
+  <div class="task-card">
+    <strong>Task Name:</strong> {{ task.task_name }} <br>
+    <strong>Task Description:</strong> {{ task.task_description }} <br>
+    <strong>Timer Duration:</strong> {{ task.duration }} seconds <br>
+    <form method="post" action="/delete_task/{{ task.task_id }}">
+      <button type="submit" class="button">Delete</button>
+    </form>
+  </div>
   {% endfor %}
 </div>
 
 
-<h2>Add Task</h2>
-<form method="post" id="add_task_form">
+<!-- for both forms -->
+<div class="forms-container">
+  <!-- task form -->
+  <div class="add-task-form-container">
+      <h2>Add Task</h2>
+      <form method="post" id="add_task_form" class="add-task-form">
+          <label for="task_name">Task Name:</label>
+          <input type="text" name="task_name" id="name_input" class="input-field" required>
 
-    <label for="task_name">Task Name:</label>
-    <input type="text" name="task_name" id="name_input" required>
+          <label for="task_description">Task Description</label>
+          <input type="text" name="task_description" id="description_input" class="input-field" required>
 
-    <label for="task_description">Task Description</label>
-    <input type="text" name="task_description" id="description_input" required>
+          <label for="timer_type">Timer Type</label>
+          <input type="text" name="timer_type" id="type_input" class="input-field" required>
 
-    <label for="timer_type">Timer Type</label>
-    <input type="text" name="timer_type" id="type_input" required>
+          <label for="duration">Task Duration</label>
+          <input type="number" name="duration" id="duration_input" class="input-field" required>
 
-    <!-- make sure task_duration is in db -->
-    <label for="duration">Task Duration</label>
-    <input type="number" name="duration" id="duration_input" required>
-
-    <button type="submit">Add Task</button>
-</form>
-
-
-<!-- <div class="tasks-list">
-        <h2>Saved Task List</h2>
-        <ol>
-            {% for task in user.tasks %}
-                <li>{{ task.task_name }} - {{ task.timer_type }} ({{ task.duration }} seconds)</li>
-            {% endfor %}
-        </ol>
-    </div> -->
-
-  <h1>User Profile</h1>
-  <!-- planning to style in css later -->
-  <div class="profile-info">
-      <form action="/update_profile" method="POST">
-          <label for="theme_preference">Theme Preference:</label>
-          <input type="text" name="theme_preference" value="{{ user.theme_preference }}"><br>
-  
-          <label for="work_session_time">Work Time Interval (minutes):</label>
-          <input type="number" name="work_session_time" value="{{ user.work_session_time }}"><br>
-  
-          <label for="break_session_time">Break Time Interval (minutes):</label>
-          <input type="number" name="break_session_time" value="{{ user.break_session_time }}"><br>
-  
-          <label for="password">New Password:</label>
-          <input type="password" name="password"><br>
-  
-          <input type="submit" value="Update Profile">
+          <button type="submit" class="button">Add Task</button>
       </form>
   </div>
-    
-<h2>Log Out</h2>
-<!-- Needs a button with an event listener or a form with a submit  -->
-<form action="/logout" method="POST">
-    <label for="logout">Logout?</label>
-    <input type="submit" value="Logout?">
-</form>
-   
-<p><a href="/">Back to Homepage</a></p>
+
+  <!-- update profile form -->
+  <div class="update-profile-form-container">
+      <h2>Update Profile</h2>
+      <div class="profile-info">
+          <form action="/update_profile" method="POST" class="update-profile-form">
+              <label for="work_session_time">Work Time Interval (minutes):</label>
+              <input type="number" name="work_session_time" value="{{ user.work_session_time }}" class="input-field"><br>
+
+              <label for="break_session_time">Break Time Interval (minutes):</label>
+              <input type="number" name="break_session_time" value="{{ user.break_session_time }}" class="input-field"><br>
+
+              <label for="password">New Password:</label>
+              <input type="password" name="password" class="input-field"><br>
+
+              <label for="theme">Select Theme:</label>
+              <select name="theme" id="theme" class="input-field">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              </select>
+
+              <input type="submit" value="Update Profile" class="button">
+          </form>
+      </div>
+  </div>
+</div>
+
+
+<!-- needs a button with an event listener or a form with a submit  -->
+<div class="top-right-buttons">
+  <form action="/logout" method="POST" class="logout-form">
+      <input type="submit" value="Logout" class="button">
+  </form>
+  <form action="/" method="GET" class="homepage-form">
+      <input type="submit" value="Homepage" class="button">
+  </form>
+</div>
 
 <script src="/static/profile.js"></script>
 {% endblock %}
