@@ -43,8 +43,8 @@ SimpleFocus is not just another productivity app; it's your personal assistant i
 
 **Screenshots**
 
-_Screenshot 1: Placeholder text for screenshot 1_
+_Homepage_
 ![Screenshot 1](/static/homepage.png)
 
-_Screenshot 2: Placeholder text for screenshot 2_
+_Dashboard_
 ![Screenshot 2](/static/dashboard.png)
