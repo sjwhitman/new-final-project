@@ -1,8 +1,9 @@
+#config file for entire app
 from flask import Flask, render_template, request, session, redirect, flash, jsonify
 from crud import get_tasks, add_task, delete_task, update_task, add_user,get_user_by_email
 from model import db, connect_to_db, Task, User
 
-
+#creates instance of flask application
 app = Flask(__name__)
 app.secret_key = "dev"
 # app.jinja_env.undefined = StrictUndefined
@@ -37,6 +38,7 @@ def add_tasks_route():
     print(task_info)
     return jsonify(task_info)
 
+#route for deleting a task
 @app.route("/delete_task/<int:task_id>", methods=['POST'])
 def delete_task_route(task_id):
     delete_task(task_id=task_id)
@@ -65,6 +67,7 @@ def register_user():
 
     return redirect("/")
 
+#login route
 @app.route("/login", methods=["POST"])
 def process_login():
     """Process user login."""
